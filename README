@@ -1,3 +1,5 @@
 FLOW3 Package created, Facebook php-sdk refactored for FLOW3
 
+including the StandardController, 1 Layout and Templates (index and indexjs examples)
+
 clone it, activate it, use it.
