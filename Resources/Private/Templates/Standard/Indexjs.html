@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+      xmlns:flux="http://flow3.localdev/ns/flux/ViewHelpers"
+      xmlns:fed="http://flow3.localdev/ns/fed/ViewHelpers"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<f:layout name="main" />
+
+<f:section name="mainbox" >
+
+    <h1>php-sdk indexjs</h1>
+    <f:debug>{data}</f:debug>
+    <f:if condition="{data.userProfile}">
+        <f:then>
+            <a href="{data.logouturl}">Logout</a>
+        </f:then>
+        <f:else>
+            <fb:login-button></fb:login-button>
+        </f:else>
+    </f:if>
+    <f:comment>{data.facebookAppId}</f:comment>
+
+    <div id="fb-root"></div>
+
+    <script>
+        var appId = '{data.facebookAppId}';
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId:  appId,
+                cookie: true,
+                xfbml: true,
+                oauth: true
+            });
+            FB.Event.subscribe('auth.login', function(response) {
+                window.location.reload();
+            });
+            FB.Event.subscribe('auth.logout', function(response) {
+                window.location.reload();
+            });
+        };
+        (function() {
+            var e = document.createElement('script'); e.async = true;
+            e.src = document.location.protocol +
+                    '//connect.facebook.net/en_US/all.js';
+            document.getElementById('fb-root').appendChild(e);
+        }());
+
+    </script>
+
+</f:section>

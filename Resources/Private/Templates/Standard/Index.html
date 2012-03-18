@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+      xmlns:flux="http://flow3.localdev/ns/flux/ViewHelpers"
+      xmlns:fed="http://flow3.localdev/ns/fed/ViewHelpers"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<f:layout name="main" />
+
+<f:section name="mainbox">
+
+    <h1>php-sdk</h1>
+    <f:if condition="{data.userProfile}">
+        <f:then>
+            <a href="{data.logouturl}">Logout</a>
+        </f:then>
+        <f:else>
+            Login using OAuth 2.0 handled by the PHP SDK: <br />
+            <a href="{data.loginurl}">Login with Facebook</a>
+        </f:else>
+    </f:if>
+
+    <f:if condition="{data.userProfile} != null">
+        <f:then>
+
+            <h3>You</h3>
+            <img src="https://graph.facebook.com/{data.userProfile.id}/picture">
+
+            <h3>Your User Object (/me)</h3>
+            <pre><f:debug>{data}</f:debug></pre>
+
+        </f:then>
+
+        <f:else>
+            <strong><em>You are not Connected.</em></strong>
+        </f:else>
+
+    </f:if>
+
+</f:section>
